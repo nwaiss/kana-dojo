@@ -2,11 +2,16 @@
 import React from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiscord, faGithub } from '@fortawesome/free-brands-svg-icons';
 import {
-  Keyboard,
-  Mountain,
-  Heart,
+  faDiscord,
+  faGithub,
+  faPatreon
+} from '@fortawesome/free-brands-svg-icons';
+import {
+  /* Keyboard, */
+  /* Mountain, */
+  /* Heart, */
+  Coffee,
   Palette,
   GitBranch,
   Type,
@@ -39,13 +44,26 @@ const socialLinks: SocialLink[] = [
     url: 'https://discord.gg/CyvBNNrSmb',
     type: 'fontawesome'
   },
-  { icon: Keyboard, url: 'https://monkeytype.com', type: 'lucide' },
-  { icon: Mountain, url: 'https://hanabira.org', type: 'lucide' },
+  /* { icon: Keyboard, url: 'https://monkeytype.com', type: 'lucide' }, */
+  /* { icon: Mountain, url: 'https://hanabira.org', type: 'lucide' }, */
+  /*
   {
     icon: Heart,
     url: 'https://ko-fi.com/kanadojo',
     type: 'lucide',
     special: 'donate'
+  }
+  */
+  {
+    icon: Coffee,
+    url: 'https://ko-fi.com/kanadojo',
+    type: 'lucide',
+    special: 'donate'
+  },
+  {
+    icon: faPatreon,
+    url: 'https://www.patreon.com/kanadojo',
+    type: 'fontawesome'
   }
 ];
 
@@ -92,25 +110,32 @@ const MobileBottomBar = () => {
           const Icon = link.icon as LucideIcon;
           const isDonate = link.special === 'donate';
 
-          return link.type === 'fontawesome' ? (
-            <FontAwesomeIcon
-              key={idx}
-              icon={link.icon as IconDefinition}
-              size="sm"
-              className={baseIconClasses}
-              onClick={() => handleClick(link.url)}
-            />
-          ) : (
-            <Icon
-              key={idx}
-              size={16}
-              className={clsx(
-                baseIconClasses,
-                isDonate &&
-                  'motion-safe:animate-pulse text-red-500 fill-current hover:text-red-500'
+          return (
+            <React.Fragment key={idx}>
+              {link.type === 'fontawesome' ? (
+                <FontAwesomeIcon
+                  icon={link.icon as IconDefinition}
+                  size="sm"
+                  className={baseIconClasses}
+                  onClick={() => handleClick(link.url)}
+                />
+              ) : (
+                <Icon
+                  size={16}
+                  className={clsx(
+                    baseIconClasses,
+                    isDonate &&
+                      'motion-safe:animate-pulse text-red-500 fill-current hover:text-red-500'
+                  )}
+                  onClick={() => handleClick(link.url)}
+                />
               )}
-              onClick={() => handleClick(link.url)}
-            />
+              {idx === 1 && socialLinks.length > 2 && (
+                <span className="text-xs text-[var(--secondary-color)] select-none">
+                  ~
+                </span>
+              )}
+            </React.Fragment>
           );
         })}
       </div>
