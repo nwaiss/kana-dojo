@@ -1160,7 +1160,7 @@ This document should be updated whenever:
 - New accessibility requirements are identified
 - Major design system changes are implemented
 
-**Last Updated:** [Current Date]  
+**Last Updated:** January 2025
 **Maintained By:** KanaDojo Team
 
 ---
